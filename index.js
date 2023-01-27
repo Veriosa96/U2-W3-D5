@@ -6,7 +6,7 @@ const listTrack = async function () {
     );
     if (res.ok) {
       let data = await res.json();
-      console.log(data);
+      console.log(res)
       let card = document.getElementById("content");
       for (let i = 0; i < 4; i++) {
         const artist = data.data[i];
@@ -27,28 +27,30 @@ const listTrack = async function () {
 listTrack();
 
 
-const listTrack1 =  async function() {
-    try{
-        let res1 = await fetch (
-            "https://striveschool-api.herokuapp.com/api/deezer/search?q=linkinpark",
-            { method: "GET" }
-          ); 
-          if(res1.ok){
-            let data1 = await res1.json()
-            console.log(data1)
-    let card2 = document.getElementById("secondRow")
-        card2.innerHTML += 
+const listTrack1 = async function() {
+    try {
+    let res1 = await fetch (
+        "https://striveschool-api.herokuapp.com/api/deezer/search?q=linkinpark",
+        { method: "GET" }
+      );
+      if(res1.ok){
+      let data = await res1.json()
+      let ins = document.getElementById("secondRow")
+      let element = data.data[3]
+        ins.innerHTML += 
         `<div class="card text-bg-dark">
-      <img src="${artist[3].album.cover_big}" class="card-img" alt="...">
+      <img src="${element.album.cover_big}" class="card-img"  alt="albumPic">
       <div class="card-img-overlay">
-        <h5 class="card-title">${artist[3].title}</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small>Last updated 3 mins ago</small></p>
+        <h5 class="card-title">${element.title}</h5>
       </div>
-    </div>`;
-          }
-        } catch (error) {
-            console.log(error)
+    </div>`;           
+      }
+     
     }
+    
+catch(error){
+   console.log(error)    
+} 
 }
+listTrack1()
 
